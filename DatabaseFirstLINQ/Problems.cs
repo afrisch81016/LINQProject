@@ -18,11 +18,11 @@ namespace DatabaseFirstLINQ
             //ProblemOne();
             //ProblemTwo();
             //ProblemThree();
-            ProblemFour();
+            //ProblemFour();
             //ProblemFive();
             //ProblemSix();
             //ProblemSeven();
-            //ProblemEight();
+            ProblemEight();
             //ProblemNine();
             //ProblemTen();
             //ProblemEleven();
@@ -99,6 +99,15 @@ namespace DatabaseFirstLINQ
 
         private void ProblemFive()
         {
+            var userRegistered = _context.Users.Where(y => y.RegistrationDate.Value.Year <= 2016 );
+            //var users = _context.Users.Where(p => DateTime.ParseExact(p.RegistrationDate, "dd/MM/yyyy", null).Year <= 2016).ToList();
+            foreach (User user in userRegistered)
+            {
+                Console.WriteLine(user.Email);
+                Console.WriteLine(user.RegistrationDate);
+
+            }
+
 
             // Write a LINQ query that gets all of the users who registered BEFORE 2016
             // Then print each user's email and registration date to the console.
@@ -107,6 +116,13 @@ namespace DatabaseFirstLINQ
 
         private void ProblemSix()
         {
+            var userRegistedDates = _context.Users.Where(d => d.RegistrationDate.Value.Year >= 2016 && d.RegistrationDate.Value.Year <= 2018);
+
+            foreach(User user in userRegistedDates)
+            {
+                Console.WriteLine(user.RegistrationDate);
+                Console.WriteLine(user.Email);
+            }
             // Write a LINQ query that gets all of the users who registered AFTER 2016 and BEFORE 2018
             // Then print each user's email and registration date to the console.
 
