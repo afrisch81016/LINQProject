@@ -143,6 +143,13 @@ namespace DatabaseFirstLINQ
 
         private void ProblemEight()
         {
+            var userItemsInCart = _context.Users.Include(g => g.Email == "afton@gmail.com"); _context.Products.Include(g => g.Id == 2); _context.ShoppingCarts.Include(g => g.ProductId);
+
+            foreach (User user in userItemsInCart)
+            {
+                Console.WriteLine(user.Id);
+                //Console.WriteLine(user.Products);
+            }
             // Write a LINQ query that retreives all of the products in the shopping cart of the user who has the email "afton@gmail.com".
             // Then print the product's name, price, and quantity to the console.
 
