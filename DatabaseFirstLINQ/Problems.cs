@@ -32,7 +32,7 @@ namespace DatabaseFirstLINQ
             //ProblemFifteen();
             //ProblemSixteen();
             //ProblemSeventeen();
-            ProblemEighteen();
+            //ProblemEighteen();
             //ProblemNineteen();
             //ProblemTwenty();
         }
@@ -302,8 +302,12 @@ namespace DatabaseFirstLINQ
         private void ProblemEighteen()
         {
             // Delete the role relationship from the user who has the email "oda@gmail.com" using LINQ.
+            var delRole = _context.UserRoles.Where(ur => ur.User.Email == "oda@gmail.com").SingleOrDefault();
+            _context.UserRoles.Remove(delRole);
 
+            _context.SaveChanges();
         }
+
 
         private void ProblemNineteen()
         {
@@ -320,7 +324,9 @@ namespace DatabaseFirstLINQ
         private void ProblemTwenty()
         {
             // Delete the user with the email "oda@gmail.com" from the Users table using LINQ.
-
+            var delUser = _context.Users.Where(u => u.Email == "oda@gmail.com").SingleOrDefault();
+            _context.Users.Remove(delUser);
+            _context.SaveChanges();
         }
 
         // <><><><><><><><> BONUS PROBLEMS <><><><><><><><><>
