@@ -22,10 +22,10 @@ namespace DatabaseFirstLINQ
             //ProblemFive();
             //ProblemSix();
             //ProblemSeven();
-            ProblemEight();
+            //ProblemEight();
             //ProblemNine();
             //ProblemTen();
-            //ProblemEleven();
+            ProblemEleven();
             //ProblemTwelve();
             //ProblemThirteen();
             //ProblemFourteen();
@@ -143,20 +143,28 @@ namespace DatabaseFirstLINQ
 
         private void ProblemEight()
         {
-            var userItemsInCart = _context.Users.Include(g => g.Email == "afton@gmail.com"); _context.Products.Include(g => g.Id == 2); _context.ShoppingCarts.Include(g => g.ProductId);
+            var userNameInfo = _context.ShoppingCarts.Include(g => g.Product).Where(g => g.User.Email == "afton@gmail.com");
 
-            foreach (User user in userItemsInCart)
+            foreach (ShoppingCart cart in userNameInfo)
             {
-                Console.WriteLine(user.Id);
-                //Console.WriteLine(user.Products);
+                Console.WriteLine(cart.Product.Name);
+                Console.WriteLine(cart.Product.Price);
+                Console.WriteLine(cart.Quantity);
             }
-            // Write a LINQ query that retreives all of the products in the shopping cart of the user who has the email "afton@gmail.com".
+                
+             // Write a LINQ query that retreives all of the products in the shopping cart of the user who has the email "afton@gmail.com".
             // Then print the product's name, price, and quantity to the console.
 
         }
 
         private void ProblemNine()
         {
+            var odaLumpSum = _context.ShoppingCarts.Include(o => o.Product).Where(o => o.User.Email == "oda@gmail.com").Select(sc => sc.Product.Price).Sum();
+
+            
+            {
+                Console.WriteLine(odaLumpSum);
+            }
             // Write a LINQ query that retreives all of the products in the shopping cart of the user who has the email "oda@gmail.com" and returns the sum of all of the products prices.
             // HINT: End of query will be: .Select(sc => sc.Product.Price).Sum();
             // Then print the total of the shopping cart to the console.
@@ -165,6 +173,25 @@ namespace DatabaseFirstLINQ
 
         private void ProblemTen()
         {
+            var employeeRole = _context.UserRoles.Include(er => er.Role).Include(er => er.User).Where(er => er.Role.RoleName == "Employee");
+            var employeeProduct = _context.ShoppingCarts.Include(ep => ep.Product);
+
+            foreach (UserRole user in employeeRole)
+            {
+                Console.WriteLine(user.User.Email);
+               
+            }
+            foreach (ShoppingCart cart in employeeProduct)
+            {
+                Console.WriteLine(cart.Product.Price);
+                Console.WriteLine(cart.Product.Name);
+                Console.WriteLine(cart.Quantity);
+            }
+
+            //var customerUsers = _context.UserRoles.Include(ur => ur.Role).Include(ur => ur.User).Where(ur => ur.Role.RoleName == "Customer");
+
+             //var userNameInfo = _context.ShoppingCarts.Include(g => g.Product).Where(g => g.User.Email == "afton@gmail.com");
+
             // Write a LINQ query that retreives all of the products in the shopping cart of users who have the role of "Employee".
             // Then print the user's email as well as the product's name, price, and quantity to the console.
 
