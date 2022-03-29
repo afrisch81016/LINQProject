@@ -345,15 +345,22 @@ namespace DatabaseFirstLINQ
             Console.WriteLine("Please enter your Password: ");
             string password = Console.ReadLine();
             Console.WriteLine($"The username entered was {username} and the password you used was {password}. ");
-            
-            
-            var authUser = _context.Users.Where(u => u.Email == username).SingleOrDefault();
-            //var authPassword = _context.Users.Where(u => u.Password == password).SingleOrDefault();
+          
+            var authUser= _context.Users.Where(u => u.Email == username).SingleOrDefault();
+            var authPassword = _context.Users.Where(u => u.Password == password).SingleOrDefault();
 
-            //User newUser = new User()
+            if( authUser == null || authPassword == null)
+            {
+                Console.WriteLine("Invalid Input!");
+            }
+            else
             {
                 Console.WriteLine("Signed In!");
-            };
+            }
+            //var authUser = _context.Users.Where(u => u.Email == username).SingleOrDefault();
+
+
+            //User newUser = new User()
 
             //_context.Users.Add(newUser);
             //_context.SaveChanges();
