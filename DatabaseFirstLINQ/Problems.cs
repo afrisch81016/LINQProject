@@ -35,6 +35,9 @@ namespace DatabaseFirstLINQ
             //ProblemEighteen();
             //ProblemNineteen();
             //ProblemTwenty();
+            BonusOne();
+            //BonusTwo();
+            //BonusThree();
         }
 
         // <><><><><><><><> R Actions (Read) <><><><><><><><><>
@@ -336,12 +339,51 @@ namespace DatabaseFirstLINQ
             // Prompt the user to enter in an email and password through the console.
             // Take the email and password and check if the there is a person that matches that combination.
             // Print "Signed In!" to the console if they exists and the values match otherwise print "Invalid Email or Password.".
+
+            Console.WriteLine("Please Enter your Email: ");
+            string username = Console.ReadLine();
+            Console.WriteLine("Please enter your Password: ");
+            string password = Console.ReadLine();
+            Console.WriteLine($"The username entered was {username} and the password you used was {password}. ");
+            
+            
+            var authUser = _context.Users.Where(u => u.Email == username).SingleOrDefault();
+            //var authPassword = _context.Users.Where(u => u.Password == password).SingleOrDefault();
+
+            //User newUser = new User()
+            {
+                Console.WriteLine("Signed In!");
+            };
+
+            //_context.Users.Add(newUser);
+            //_context.SaveChanges();
+
+
+
+
+
         }
 
         private void BonusTwo()
         {
+
             // Write a query that finds the total of every users shopping cart products using LINQ.
             // Display the total of each users shopping cart as well as the total of the toals to the console.
+
+            var aftonCartSum = _context.ShoppingCarts.Include(o => o.Product).Where(o => o.User.Email == "afton@gmail.com").Select(sc => sc.Product.Price).Sum();
+            var bibiCartSum = _context.ShoppingCarts.Include(o => o.Product).Where(o => o.User.Email == "bibi@gmail.com").Select(sc => sc.Product.Price).Sum();
+            var janettCartSum = _context.ShoppingCarts.Include(o => o.Product).Where(o => o.User.Email == "janett@gmail.com").Select(sc => sc.Product.Price).Sum();
+            var garyCartSum = _context.ShoppingCarts.Include(o => o.Product).Where(o => o.User.Email == "gary@gmail.com").Select(sc => sc.Product.Price).Sum();
+            var mikeCartSum = _context.ShoppingCarts.Include(o => o.Product).Where(o => o.User.Email == "mike@gmail.com").Select(sc => sc.Product.Price).Sum();
+
+
+            Console.WriteLine(aftonCartSum);
+            Console.WriteLine(bibiCartSum);
+            Console.WriteLine(janettCartSum);
+            Console.WriteLine(garyCartSum);
+            Console.WriteLine(mikeCartSum);
+            Console.WriteLine(aftonCartSum+bibiCartSum+janettCartSum+garyCartSum+mikeCartSum);
+
         }
 
         // BIG ONE
